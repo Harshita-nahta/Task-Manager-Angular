@@ -1,0 +1,31 @@
+.sidebar{
+    position: fixed;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    padding: 48px 0 0;
+    margin-right: 200px;
+}
+.flex-column{
+    flex-direction: column!important;
+}
+.nav-link{
+    display: block;
+    padding: 1rem 3rem;
+}
+.divider {
+    height: 1px;
+    margin: 4px 13px;
+    overflow: hidden;
+    background-color: #e5e5e5 ;
+    opacity: 0.5 ;
+}
+
+@media (max-width:767px){
+    .divider {
+          height: 1px;
+          margin: 9px 0;
+          overflow: hidden;
+          background-color: #e5e5e5;
+      }
+  }

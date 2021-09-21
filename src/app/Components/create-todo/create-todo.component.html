@@ -1,0 +1,67 @@
+
+<h2 class="my-5">Create a Task</h2>
+<form (submit)="!updateId ?addTodo($event) : updateTask()  ">
+
+    <div class="form-group">
+        <div class="form-row">
+            <label for="newTodo" class="col-2 font-weight-bold">Title</label>
+            <input [(ngModel)]="newTodo" name="newTodo"  [ngClass]="(newTodo!=='' )?'is-valid':'is-invalid'"  [ngClass]="(updateId && updateTodo.newTodo!=='')?'':'is-invalid'"    class="inputTodo col-7 " placeholder="Go for a Walk ..." required  >
+            <div class="invalid-feedback">
+                <strong>* Please Enter a Title</strong>
+            </div>
+            <div class="valid-feedback">
+                <strong> It looks Good !</strong>
+            </div> 
+        </div>
+    </div>
+    <div class="form-group ">
+        <div class="form-row">
+        <label for="todoDesc" class="col-2 font-weight-bold">Description</label>
+        <textarea [(ngModel)]="todoDesc" name="todoDesc" class="inputTodo col-7" placeholder="" ></textarea>
+        </div>
+    </div>
+    <div class="form-group ">
+        <div class="form-row">
+        <label for="taskOwner" class="col-2 font-weight-bold">Task Owner</label>
+        <input  [(ngModel)]="taskOwner" name="taskOwner" class="inputTodo col-7" placeholder="Task Owner" >
+        </div>
+    </div>
+    <div class="form-group ">
+        <div class="form-row">
+            <label for="dueDate" class="col-2 font-weight-bold">Due Date</label>
+            <input  type="date" [(ngModel)]="dueDate" name="dueDate"  placeholder="dd-mm-yyyy"  [min]="created_at" id="">
+           <div class="col ml-4">
+            <input type="checkbox" [(ngModel)]="isPrior" name="isPrior" class=" mt-2 ml-2" >
+            <span class="ml-2">Mark as Important</span>
+        </div>
+        </div>
+    </div>
+    <div class="form-group "  *ngIf="updateId>=0">
+        <div class="form-row">
+            <label for="status" class="col-2 font-weight-bold">Status</label>
+           
+            <a name=status class="btn  dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{status}} 
+            </a>
+                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <button class="dropdown-item" (click)="updateStatus('New Task')" type="button">New Task</button>
+                     <button class="dropdown-item" (click)="updateStatus('Completed')" type="button">Completed</button>
+                     <button class="dropdown-item" (click)="updateStatus('On Hold')" type="button">On Hold</button>
+                     <button class="dropdown-item" (click)="updateStatus('In Progress')" type="button">In Progress</button>
+                </div>
+        </div>
+    </div>
+    
+  
+        <div *ngIf=updated class=" col-9 update-feedback">
+            Your task Updated
+        </div>
+  
+    <div>
+        <button *ngIf="!(updateId>=0)" type="submit" class="addTodo btn btn-block col-9 mt-5 text-white font-weight-bold">Add Task</button>
+        <button *ngIf="updateId>=0"  class="addTodo btn btn-block col-9 mt-3 text-white font-weight-bold">Update Task</button>
+        <button *ngIf="updateId>=0" routerLink="/" (click)="deleteTodo(updateId)"  class=" btn btn-block btn-danger col-9 text-white font-weight-bold">Delete Task</button>
+    </div>
+
+
+</form>

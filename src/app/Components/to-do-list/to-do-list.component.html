@@ -1,0 +1,72 @@
+
+<br>
+<h1 class="font-weight-bold">My {{url}} Tasks</h1>
+
+<hr>
+<div class="row "  [ngClass]="{'mb-5' : router.url!=='/' }" >
+<mat-form-field class="searchBox" >
+    <input (keyup)="applyFilter($event.target.value)" matInput ><mat-icon matSuffix>search</mat-icon>
+</mat-form-field>
+
+<button *ngIf="router.url==='/'" type="submit" routerLink="/Create" class="addTodo btn mt-2 mb-5 mr-5 ml-auto">Create</button>
+
+</div>
+
+
+<div class="row">
+   <!--- <div *ngIf="router.url==='/'">-->
+        <table mat-table [dataSource]="dataSource" class="table mat-elevation-z6">
+
+            <ng-container matColumnDef="id">
+              <th mat-header-cell *matHeaderCellDef> Id </th>
+              <td mat-cell *matCellDef="let element"> {{element.id}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="newTask">
+              <th mat-header-cell *matHeaderCellDef> Task </th>
+              <td mat-cell *matCellDef="let element"> {{element.newTodo}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="taskOwner">
+              <th mat-header-cell *matHeaderCellDef> Task Owner </th>
+              <td mat-cell *matCellDef="let element"> {{element.taskOwner}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="status">
+              <th mat-header-cell *matHeaderCellDef> Status </th>
+              <td mat-cell *matCellDef="let element; let i =index;"> <a class="btn  dropdown-toggle" type="button" id="dropdownMenu2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                {{element.status}} 
+                </a>
+                 <div class="dropdown-menu" aria-labelledby="dropdownMenu2">
+                    <button class="dropdown-item" (click)="setNewTodo(element.id,i )" type="button">New Task</button>
+                    <button class="dropdown-item" (click)="completeTodo(element.id , i)" type="button">Completed</button>
+                    <button class="dropdown-item" (click)="setHoldTodo(element.id ,i)"type="button">On Hold</button>
+                    <button class="dropdown-item" (click)="setProgressTodo(element.id , i   )"type="button">In Progress</button>
+                </div></td>
+            </ng-container>
+          
+            <ng-container matColumnDef="created_at">
+                <th mat-header-cell *matHeaderCellDef> Created </th>
+                <td mat-cell *matCellDef="let element"> {{element.created_at}} </td>
+            </ng-container>
+          
+            <ng-container matColumnDef="dueDate">
+                <th mat-header-cell *matHeaderCellDef> Due Date </th>
+                <td mat-cell *matCellDef="let element"> {{element.dueDate}} </td>
+            </ng-container>
+
+            <ng-container matColumnDef="isPrior">
+                <th mat-header-cell *matHeaderCellDef> Action </th>
+                <td mat-cell *matCellDef="let element; let i =index">
+                    <button type="button" routerLink="/Update/{{element.id}}" class="actionTodo btn" ><i class="fa fa-pencil"></i></button>
+                    <button type="button" class="actionTodo btn text-danger" (click)="deleteTodo(element.id,i)"><i class="fa fa-trash"></i></button>
+                     </td>
+            </ng-container>
+              
+        
+
+            <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+            <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+          </table>
+         
+    </div>

@@ -1,0 +1,23 @@
+.inputTodo{
+    outline: 0;
+    border-width: 0 0 2px;
+}
+button[type="submit"] , .addTodo{
+    background-color: #10b492;
+    color: #343a40;
+    font-size: large;
+}
+
+.valid-feedback , .invalid-feedback {
+    margin-left : 160px;
+} 
+input.is-invalid{
+    border-color: red !important;
+}
+.update-feedback{
+    border:  #10b492;
+    background-color: #b6ddd5;
+    color: #00493b;
+    padding: 10px 2px; 
+    text-align: center;
+}
